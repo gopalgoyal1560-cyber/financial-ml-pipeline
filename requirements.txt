@@ -5,3 +5,5 @@ python-dotenv
 numpy
 yfinance
 joblib
+genson
+deepdiff
