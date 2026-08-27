@@ -29,6 +29,7 @@ def fetch_data(URL:str,query:dict,endpoint_name:str):
     try:
         response = requests.get(url=URL,params=query,timeout=(5,30))
         response.raise_for_status()
+        query['apikey'] = "your_alpha_vantage_key"
     except requests.exceptions.ConnectionError as c:
         logger.info(f"ConnectionError | endpoint : {endpoint_name} | query : {query} | error : {c}")
         raise
