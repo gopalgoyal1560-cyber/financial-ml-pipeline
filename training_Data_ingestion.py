@@ -64,13 +64,9 @@ def save_raw_response(data:dict,endpoint:str):
         logger.error(f"Error in saving raw response | error : {e} | intended file : {file_name}")
 
 def data_prasing(d2:dict,d3:dict,d4:dict):
-    # full1 = []
-    # for i,j in d1["Time Series (Daily)"].items():
-    #     chunk = []
-    #     row = [i,j["1. open"],j["2. high"],j["3. low"],j["4. close"],j["5. adjusted"],j["6. volume"],j["7. dividend amount"],j["8. split coefficient"]]
-    #     chunk.append(row)
-    #     full1.append(chunk)
-    # df1 = pd.DataFrame(full1,columns=["Date","open","high","low","close","adjusted","volume","dividend_amount","split_coefficient"])
+    for name, d in [("Treasury", d2), ("WTI", d3), ("Gold_history", d4)]:
+        if "data" not in d:
+            raise RuntimeError(f"Unexpected API response for {name}: {d}")
 
     full2 = []
     for i in d2["data"]:
