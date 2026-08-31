@@ -52,7 +52,7 @@ def fetch_data(URL:str,query:dict,endpoint_name:str):
 
 def save_raw_response(data:dict,endpoint:str):
     today = datetime.now().strftime("%d-%m-%y")
-    file_path = Path(f"data\\raw_response")
+    file_path = Path(f"data/raw_response")
     file_path.mkdir(parents=True,exist_ok=True)
 
     file_name = f"{file_path}/{today}_{endpoint}.json"
@@ -167,7 +167,7 @@ def add_obv(df, price_col="adjusted"):
 
 
 def add_returns(df, price_col="adjusted"):
-    df["return_pct"] = df[price_col].pct_change()
+    df["return_pct"] = df[price_col].pct_change(fill_method = None)
     df["return_log"] = np.log(df[price_col] / df[price_col].shift(1))
     return df
 
@@ -183,7 +183,7 @@ def add_volatility(df, windows=(10, 20)):
 def add_momentum(df, price_col="adjusted", periods=(10, 20)):
     for p in periods:
         df[f"momentum_{p}"] = df[price_col] - df[price_col].shift(p)
-        df[f"roc_{p}"] = df[price_col].pct_change(periods=p) * 100
+        df[f"roc_{p}"] = df[price_col].pct_change(fill_method = None,periods=p) * 100
     return df
 
 
