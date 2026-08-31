@@ -1,69 +1,3 @@
-# import requests
-# import time
-# from datetime import datetime,timezone
-# from tenacity import (retry,stop_after_attempt,wait_exponential,retry_if_exception_type)
-# import json,csv,os,pandas as pd,logging
-# from pathlib import Path
-# from joblib import dump
-# from dotenv import load_dotenv
-# import numpy as np
-# import yfinance as yf
-# import training_Data_ingestion as td
-
-# load_dotenv()
-# key = os.getenv("KEY_alpha")
-# Path("log").mkdir(parents=True,exist_ok=True)
-
-# logging.basicConfig(
-#     filename="log/daily.log",
-#     level=logging.INFO,
-#     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-# )
-# logger = logging.getLogger(__name__)
-
-# def fetch_all_data():
-#     url = "https://www.alphavantage.co/query"
-
-#     y = yf.download("IBM",interval="1d",period="max",auto_adjust=False)
-#     if isinstance(y.columns,pd.MultiIndex):
-#         y.columns = y.columns.get_level_values(0)
-
-#     y = y.rename(columns={"Open": "open", "High": "high", "Low": "low","Close": "close", "Adj Close": "adjusted", "Volume": "volume",})
-#     y.index.name = "Date"
-#     y = y.reset_index()
-#     logger.info(f"Fetched IBM ohlcv data using downloaded api| {len(y)} rows and {len(y.columns)} columns")
-
-#     query2 = {
-#         "function":"TREASURY_YIELD",
-#         "interval":"daily",
-#         "maturity":"30year",
-#         "datatype":"json",
-#         "apikey":key
-#         }
-#     treasury = td.fetch_data(url,query2,"Tresury")
-
-#     query3 = {
-#         "function":"WTI",
-#         "interval":"daily",
-#         "datatype":"json",
-#         "apikey":key
-#     }
-#     wti = td.fetch_data(url,query3,"WTI")
-
-#     query4 = {
-#         "function":"GOLD_SILVER_HISTORY",
-#         "symbol":"GOLD",
-#         "interval":"daily",
-#         "apikey":key
-#     }
-#     gold_history = td.fetch_data(url,query4,"Gold_history")
-#     df2,df3,df4 = td.data_prasing(treasury,wti,gold_history)
-#     y  = td.frame_prep(y,"Date")
-#     y = td.add_all_indicators(y)
-#     df2 = td.frame_prep(df2,"Date")
-#     df3 = td.frame_prep(df3,"Date")
-#     df4 = td.frame_prep(df4,"Date")
-#     final = td.merged_data(y,df2,df3,df4)
 
 import json, os
 from datetime import datetime, timedelta
@@ -85,13 +19,12 @@ from training_Data_ingestion import (
 )
 
 Path("log").mkdir(parents=True, exist_ok=True)
-logging.basicConfig(
-    filename="log/daily_ingestion.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
 logger = logging.getLogger(__name__)
-
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler("log/daily_ingestion.log")
+handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+logger.addHandler(handler)
+logger.propagate = False  # don't also send these up to the root logger / ingestion.log
 
 # --------------------------------------------------------------------------
 # 1) LOAD a previously saved raw json file (same naming convention as save_raw_response)
@@ -103,7 +36,7 @@ def load_raw_response(endpoint: str, date: str = None):
     Returns parsed json on success, or None if missing/corrupt - never raises.
     """
     date = date or datetime.now().strftime("%d-%m-%y")
-    file_name = Path(f"data/raw_response/{date}_{endpoint}.json")
+    file_name = Path(f"data/raw_response/{"31-08-26"}_{endpoint}.json")
 
     if not file_name.exists():
         logger.warning(f"Raw response file not found | file : {file_name}")
@@ -287,9 +220,9 @@ def fetch_daily_data():
     logger.info(f"Fetched IBM ohlcv data | {len(y)} rows and {len(y.columns)} columns")
 
     # compare against yesterday's row already sitting in daily_latest.csv, if it exists
-    prev_row_path = Path("data/processed/daily_latest.csv")
+    prev_row_path = Path("data/processed/merged_imb_dataset2.csv")
     old_y = pd.read_csv(prev_row_path) if prev_row_path.exists() else None
-    if not validate_df_schema(old_y, y.drop(columns=["Date"]), "ibm_ohlcv"):
+    if not validate_df_schema(old_y[["adjusted","close","high","low","open","volume"]].astype({"volume": "float64"}), y.drop("Date",axis=1).astype("float64"), "ibm_ohlcv"):
         logger.critical("Stopping pipeline: IBM OHLCV schema check failed.")
         return None
 
