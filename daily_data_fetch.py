@@ -36,7 +36,7 @@ def load_raw_response(endpoint: str, date: str = None):
     Returns parsed json on success, or None if missing/corrupt - never raises.
     """
     date = date or datetime.now().strftime("%d-%m-%y")
-    file_name = Path(f"data/raw_response/"31-08-26"_{endpoint}.json")
+    file_name = Path(f"data/raw_response/31-08-26_{endpoint}.json")
 
     if not file_name.exists():
         logger.warning(f"Raw response file not found | file : {file_name}")
