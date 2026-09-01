@@ -220,17 +220,7 @@ def fetch_all_data():
     y.index.name = "Date"
     y = y.reset_index()
     logger.info(f"Fetched IBM ohlcv data using downloaded api| {len(y)} rows and {len(y.columns)} columns")
-    # query1 = {
-    #     "function":"TIME_SERIES_DAILY_ADJUSTED",
-    #     "symbol":"IBM",
-    #     "outputsize":"full",
-    #     "datatype":"json",
-    #     "entitlement":"realtime",
-    #     "apikey":key
-    # }
-    # TBM = fetch_data(url,query1,"TIME_SERIES_DAILY_ADJUSTED")
-    # save_raw_response(TBM,"TIME_SERIES_DAILY_ADJUSTED")
-
+    
     query2 = {
         "function":"TREASURY_YIELD",
         "interval":"daily",
