@@ -1,0 +1,11 @@
+2026-09-01 10:45:33,404 - __main__ - INFO - Fetched IBM ohlcv data | 250 rows and 7 columns
+2026-09-01 10:45:34,430 - __main__ - INFO - DataFrame schema validation PASSED (unchanged) | name : ibm_ohlcv
+2026-09-01 10:45:34,651 - __main__ - INFO - Loaded Raw Response | file : data/raw_response/31-08-26_Treasury.json
+2026-09-01 10:45:34,694 - __main__ - INFO - Schema validation PASSED (unchanged) | source : Treasury
+2026-09-01 10:45:35,826 - __main__ - INFO - Loaded Raw Response | file : data/raw_response/31-08-26_WTI.json
+2026-09-01 10:45:35,861 - __main__ - INFO - Schema validation PASSED (unchanged) | source : WTI
+2026-09-01 10:45:37,091 - __main__ - INFO - Loaded Raw Response | file : data/raw_response/31-08-26_Gold_history.json
+2026-09-01 10:45:37,110 - __main__ - INFO - Schema validation PASSED (unchanged) | source : Gold_history
+2026-09-01 10:45:38,165 - __main__ - INFO - Imputed merged dataset with ffill() | missing before : 280 | missing after : 272
+2026-09-01 10:45:38,166 - __main__ - INFO - Saved latest row | file : data/processed/daily_latest.csv | date : 2026-08-31
+2026-09-01 10:45:38,167 - __main__ - INFO - Daily pipeline completed successfully | final_length : 250 | missing_values : 272
