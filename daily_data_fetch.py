@@ -7,6 +7,7 @@ import pandas as pd
 import yfinance as yf
 from genson import SchemaBuilder
 from deepdiff import DeepDiff
+import time
 
 from training_Data_ingestion import (
     key,
@@ -218,7 +219,7 @@ def fetch_daily_data():
     y.index.name = "Date"
     y = y.reset_index()
     logger.info(f"Fetched IBM ohlcv data | {len(y)} rows and {len(y.columns)} columns")
-
+    time.sleep(1)
     # compare against yesterday's row already sitting in daily_latest.csv, if it exists
     prev_row_path = Path("data/processed/merged_imb_dataset2.csv")
     old_y = pd.read_csv(prev_row_path) if prev_row_path.exists() else None
@@ -232,21 +233,21 @@ def fetch_daily_data():
     if not validate_schema(old_treasury, treasury, "Treasury"):
         logger.critical("Stopping pipeline: Treasury schema check failed.")
         return None
-
+    time.sleep(1)
     query3 = {"function": "WTI", "interval": "daily", "datatype": "json", "apikey": key}
     wti = fetch_data(url, query3, "WTI")
     old_wti = load_raw_response("WTI", yesterday)
     if not validate_schema(old_wti, wti, "WTI"):
         logger.critical("Stopping pipeline: WTI schema check failed.")
         return None
-
+    time.sleep(1)
     query4 = {"function": "GOLD_SILVER_HISTORY", "symbol": "GOLD", "interval": "daily", "apikey": key}
     gold_history = fetch_data(url, query4, "Gold_history")
     old_gold = load_raw_response("Gold_history", yesterday)
     if not validate_schema(old_gold, gold_history, "Gold_history"):
         logger.critical("Stopping pipeline: Gold_history schema check failed.")
         return None
-
+    time.sleep(1)
     # all schema checks passed -> reuse the imported parsing/merge pipeline
     df2, df3, df4 = data_prasing(treasury, wti, gold_history)
     y = frame_prep(y, "Date")
