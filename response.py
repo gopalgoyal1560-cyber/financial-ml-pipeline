@@ -2,6 +2,7 @@ import requests as rq
 import pandas as pd
 import logging
 from pathlib import Path
+import sys
 
 Path("log").mkdir(parents=True, exist_ok=True)
 logger = logging.getLogger(__name__)
@@ -26,9 +27,13 @@ try:
     print(prediction)
 except rq.exceptions.Timeout as t:
     logger.error(f"Prediction request FAILED (timeout) | url : {url} | error : {t}")
+    sys.exit(1)
 except rq.exceptions.ConnectionError as c:
     logger.error(f"Prediction request FAILED (connection error) | url : {url} | error : {c}")
+    sys.exit(1)
 except rq.exceptions.HTTPError as h:
     logger.error(f"Prediction request FAILED (HTTP error) | url : {url} | status : {response.status_code} | response : {response.text[:200]}")
+    sys.exit(1)
 except Exception as e:
     logger.error(f"Prediction request FAILED (unexpected) | url : {url} | error : {e}")
+    sys.exit(1)
