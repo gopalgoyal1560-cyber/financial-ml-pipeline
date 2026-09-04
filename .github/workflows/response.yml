@@ -1,0 +1,42 @@
+name: Response Trigger
+
+on:
+  workflow_run:
+    workflows: ["Daily Data Fetch"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  respond:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait 5 minutes after fetch completion
+        run: sleep 300
+
+      - name: Pull latest data (fetch job may have pushed after this checkout)
+        run: git pull --ff-only
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r project_requirements/requirements.txt
+
+      - name: Run response script
+        run: python response.py
+
+      - name: Commit updated log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add log/
+          git diff --cached --quiet || git commit -m "Response log update: $(date -u +'%Y-%m-%d')"
+          git push
