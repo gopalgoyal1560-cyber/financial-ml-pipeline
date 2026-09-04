@@ -7,3 +7,7 @@ yfinance
 joblib
 genson
 deepdiff
+fastapi
+scikit-learn
+matplotlib
+seaborn
