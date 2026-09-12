@@ -9,7 +9,6 @@ model = pipline["model"]
 features = pipline["features"]
 
 d = {}
-print(features)
 for i,j in features.items():
     j = str(j)
     if j in ('int32','int64'):
