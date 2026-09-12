@@ -300,7 +300,7 @@ def call_live_api(payload: dict):
 st.markdown(
     """
     <div class="hero">
-        <h1>📈 Financial ML Pipeline — Prototype Dashboard</h1>
+        <h1>📈 Financial ML Pipeline — Dashboard</h1>
         <p>End-to-end view of the ingestion → validation → feature engineering → model → prediction API pipeline for IBM daily returns.</p>
         <span class="status-pill">⚠ EXPERIMENTAL MODEL — SEE MODEL COMPARISON TAB</span>
     </div>
