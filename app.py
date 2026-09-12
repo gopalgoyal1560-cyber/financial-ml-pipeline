@@ -307,7 +307,29 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
+st.markdown(
+    """
+    <div style="
+        background: rgba(231, 76, 60, 0.12);
+        border: 1px solid rgba(231, 76, 60, 0.4);
+        border-radius: 12px;
+        padding: 1rem 1.3rem;
+        margin-bottom: 1.4rem;
+        color: #f5b7b1;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    ">
+        <strong>⚠️ Disclaimer:</strong> This is a personal portfolio project built to demonstrate an
+        end-to-end ML pipeline (data ingestion, feature engineering, model training, and deployment).
+        It is <strong>not financial advice</strong> and comes with <strong>no guarantee of accuracy,
+        reliability, or performance</strong>. The model's predictions are experimental and, as shown in
+        the Model Comparison tab, do not reliably outperform a naive baseline. Do <strong>not</strong>
+        use this app, its outputs, or its predictions to make investment decisions or to analyze real
+        financial markets.
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 # ----------------------------------------------------------------------------
 # TOP-LEVEL KPIs
 # ----------------------------------------------------------------------------
