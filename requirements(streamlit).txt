@@ -1,0 +1,16 @@
+requests
+tenacity
+pandas
+python-dotenv
+numpy
+yfinance
+joblib
+genson
+deepdiff
+fastapi
+uvicorn
+pydantic
+scikit-learn
+matplotlib
+seaborn
+plotly
