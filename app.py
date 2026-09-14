@@ -287,7 +287,7 @@ def parse_prediction_log():
 
 def call_live_api(payload: dict):
     try:
-        resp = requests.post(API_URL, json=payload, timeout=(5, 30))
+        resp = requests.post(API_URL, json=payload, timeout=(5, 50))
         resp.raise_for_status()
         return resp.json(), None
     except Exception as e:
