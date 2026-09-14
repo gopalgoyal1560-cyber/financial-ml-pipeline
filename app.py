@@ -420,7 +420,7 @@ with tab_live:
 
         if st.button("🚀 Request Prediction", type="primary"):
             payload = latest_row.to_dict(orient="records")[0]
-            with st.spinner("Calling deployed model API (may take up to ~30s if the service is cold)..."):
+            with st.spinner("Calling deployed model API (may take up to ~60s if the service is cold)..."):
                 result, error = call_live_api(payload)
 
             if error:
