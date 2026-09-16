@@ -23,7 +23,7 @@ import requests
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-
+from tenacity import (retry,stop_after_attempt,wait_exponential,retry_if_exception_type)
 # ----------------------------------------------------------------------------
 # PAGE CONFIG
 # ----------------------------------------------------------------------------
@@ -285,6 +285,10 @@ def parse_prediction_log():
     return pd.DataFrame(rows)
 
 
+@retry(stop=stop_after_attempt(4),
+        wait=wait_exponential(multiplier=1,min=2,max=20),
+        retry=retry_if_exception_type((requests.ConnectionError, requests.Timeout)),
+        reraise=True)
 def call_live_api(payload: dict):
     try:
         resp = requests.post(API_URL, json=payload, timeout=(5, 60))
