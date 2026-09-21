@@ -65,7 +65,7 @@ def save_raw_response(data:dict,endpoint:str):
 
 def data_prasing(d2:dict,d3:dict,d4:dict):
     for name, d in [("Treasury", d2), ("WTI", d3), ("Gold_history", d4)]:
-        if "data" not in d:
+        if "date" not in d:
             raise RuntimeError(f"Unexpected API response for {name}: {d}")
 
     full2 = []
