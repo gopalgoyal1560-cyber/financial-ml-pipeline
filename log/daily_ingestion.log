@@ -521,3 +521,4 @@
 2026-10-29 01:52:53,303 - __main__ - INFO - Imputed merged dataset with ffill() | missing before : 277 | missing after : 272
 2026-10-29 01:52:53,305 - __main__ - INFO - Saved latest row | file : data/processed/daily_latest.csv | date : 2026-10-28
 2026-10-29 01:52:53,305 - __main__ - INFO - Daily pipeline completed successfully | final_length : 251 | missing_values : 272
+2026-10-29 01:58:36,651 - __main__ - INFO - Prediction request SUCCESS | url : https://financial-ml-pipeline-up86.onrender.com/Post_values | prediction : {'predictions': [-0.002051179261562473]}
