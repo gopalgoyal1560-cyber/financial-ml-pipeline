@@ -618,3 +618,14 @@
 2026-11-10 04:12:06,882 - __main__ - INFO - Saved latest row | file : data/processed/daily_latest.csv | date : 2026-11-09
 2026-11-10 04:12:06,883 - __main__ - INFO - Daily pipeline completed successfully | final_length : 251 | missing_values : 272
 2026-11-10 04:17:41,958 - __main__ - INFO - Prediction request SUCCESS | url : https://financial-ml-pipeline-up86.onrender.com/Post_values | prediction : {'predictions': [-0.0019472264861150946]}
+2026-11-11 01:59:48,259 - __main__ - INFO - Fetched IBM ohlcv data | 251 rows and 7 columns
+2026-11-11 01:59:49,271 - __main__ - INFO - DataFrame schema validation PASSED (unchanged) | name : ibm_ohlcv
+2026-11-11 01:59:49,691 - __main__ - INFO - Loaded Raw Response | file : data/raw_response/31-08-26_Treasury.json
+2026-11-11 01:59:49,736 - __main__ - INFO - Schema validation PASSED (unchanged) | source : Treasury
+2026-11-11 01:59:51,027 - __main__ - INFO - Loaded Raw Response | file : data/raw_response/31-08-26_WTI.json
+2026-11-11 01:59:51,064 - __main__ - INFO - Schema validation PASSED (unchanged) | source : WTI
+2026-11-11 01:59:52,363 - __main__ - INFO - Loaded Raw Response | file : data/raw_response/31-08-26_Gold_history.json
+2026-11-11 01:59:52,382 - __main__ - INFO - Schema validation PASSED (unchanged) | source : Gold_history
+2026-11-11 01:59:53,436 - __main__ - INFO - Imputed merged dataset with ffill() | missing before : 281 | missing after : 274
+2026-11-11 01:59:53,438 - __main__ - INFO - Saved latest row | file : data/processed/daily_latest.csv | date : 2026-11-10
+2026-11-11 01:59:53,438 - __main__ - INFO - Daily pipeline completed successfully | final_length : 251 | missing_values : 274
