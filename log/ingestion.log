@@ -419,3 +419,10 @@
 2026-11-24 06:10:13,024 - training_Data_ingestion - INFO - Request | endpoint : Gold_history | query :{'function': 'GOLD_SILVER_HISTORY', 'symbol': 'GOLD', 'interval': 'daily', 'apikey': 'your_alpha_vantage_key'}
 2026-11-24 06:10:13,026 - training_Data_ingestion - INFO - Info | endpoint : Gold_history | fetched 2  data | query : {'function': 'GOLD_SILVER_HISTORY', 'symbol': 'GOLD', 'interval': 'daily', 'apikey': 'your_alpha_vantage_key'}
 2026-11-24 06:10:14,103 - training_Data_ingestion - INFO - Limiting dataset: ibm | cutoff date: 2025-11-24
+2026-11-25 04:56:42,768 - training_Data_ingestion - INFO - Request | endpoint : Treasury | query :{'function': 'TREASURY_YIELD', 'interval': 'daily', 'maturity': '30year', 'datatype': 'json', 'apikey': 'your_alpha_vantage_key'}
+2026-11-25 04:56:42,774 - training_Data_ingestion - INFO - Info | endpoint : Treasury | fetched 4  data | query : {'function': 'TREASURY_YIELD', 'interval': 'daily', 'maturity': '30year', 'datatype': 'json', 'apikey': 'your_alpha_vantage_key'}
+2026-11-25 04:56:44,087 - training_Data_ingestion - INFO - Request | endpoint : WTI | query :{'function': 'WTI', 'interval': 'daily', 'datatype': 'json', 'apikey': 'your_alpha_vantage_key'}
+2026-11-25 04:56:44,090 - training_Data_ingestion - INFO - Info | endpoint : WTI | fetched 4  data | query : {'function': 'WTI', 'interval': 'daily', 'datatype': 'json', 'apikey': 'your_alpha_vantage_key'}
+2026-11-25 04:56:45,304 - training_Data_ingestion - INFO - Request | endpoint : Gold_history | query :{'function': 'GOLD_SILVER_HISTORY', 'symbol': 'GOLD', 'interval': 'daily', 'apikey': 'your_alpha_vantage_key'}
+2026-11-25 04:56:45,306 - training_Data_ingestion - INFO - Info | endpoint : Gold_history | fetched 2  data | query : {'function': 'GOLD_SILVER_HISTORY', 'symbol': 'GOLD', 'interval': 'daily', 'apikey': 'your_alpha_vantage_key'}
+2026-11-25 04:56:46,345 - training_Data_ingestion - INFO - Limiting dataset: ibm | cutoff date: 2025-11-25
